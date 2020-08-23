@@ -1,9 +1,22 @@
 import React, {Component} from 'react';
-import {Text} from 'react-native';
+import {FlatList, Text} from 'react-native';
+import EventCard from "./EventCard";
+
 class EventList extends Component{
+    state = {
+        events:[]
+    }
+    componentDidMount() {
+        const events = require('./db.json').events;
+        this.setState({events});
+    }
+
     render(){
         return(
-            <Text>Hello!</Text>
+            <FlatList
+                data={this.state.events}
+                renderItem={({item})=> <EventCard event={item} />}
+            />
         );
     }
 }
